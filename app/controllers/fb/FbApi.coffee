@@ -18,7 +18,7 @@ muninn = require('muninn')
 
 class FbApi extends muninn.core.Controller
 
-  fb = require('fb')
+  #fb = require('fb')
 
   @routes =
     '/search':    'searchAction'

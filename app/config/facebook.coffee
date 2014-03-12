@@ -12,8 +12,8 @@ module.exports =
 
   else
     rootUrl:        "http://localhost:3000/"
-    appId:          ""
-    appSecret:      ""
+    appId:          "1478930342328388"
+    appSecret:      "58e05aa1a2a2909e95676524c4cba73c"
     appNamespace:   "frodo-demo"
     redirectUri:    "http://localhost:3000/login/callback"
 

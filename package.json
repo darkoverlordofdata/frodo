@@ -28,7 +28,7 @@
   "dependencies": {
     "coffee-script": "~1.7.1",
     "fb": "~0.6.2",
-    "step": "0.0.5"
+    "fbgraph": "~0.2.9"
   },
   "devDependencies": {},
   "bundleDependencies": [],

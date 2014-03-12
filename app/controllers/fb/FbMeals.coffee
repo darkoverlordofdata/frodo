@@ -18,7 +18,7 @@ muninn = require('muninn')
 
 class FbMeals extends muninn.core.Controller
 
-  fb = require('fb')
+  #fb = require('fb')
 
   @routes =
     '/meals/:id':       'indexAction'
