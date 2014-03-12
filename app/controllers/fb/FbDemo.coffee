@@ -34,6 +34,10 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
+    console.log "===================="
+    console.log @req.query.code
+    console.log "===================="
+
     @res.render 'demo/index',
       title: 'Express',
       loginUrl: muninn.config.fb.redirectUri
