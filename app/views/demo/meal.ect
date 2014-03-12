@@ -1,5 +1,8 @@
 <html>
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# <%= @appNamespace %>: http://ogp.me/ns/fb/<%= @appNamespace %>#">
+        <script>
+            if ( window.location.protocol === 'http:' ) window.top.location = window.location.href.replace('http:', 'https:')
+        </script>
         <meta property="fb:app_id" content="<%= @appId %>" />
         <meta property="og:type"   content="<%= @appNamespace %>:meal" />
         <meta property="og:url"    content="<%= @meal.url %>" />
