@@ -16,18 +16,16 @@
 
 muninn = require('muninn')
 
+
 class FbDemo extends muninn.core.Controller
 
-  fb = require('fb')
-  fb.options
-    appId:          muninn.config.fb.appId
-    appSecret:      muninn.config.fb.appSecret
-    redirectUri:    muninn.config.fb.redirectUri
+  graph = require('fbgraph')
 
   @routes =
     '/demo':            'indexAction'
-    '/login/callback':  'loginCallback'
+    '/login/callback':  'authAction'
     '/logout':          'logoutAction'
+    '/loggedin':        'loginAction'
 
 
   #
@@ -36,66 +34,48 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
-    console.log 'ENCRYPTED: ' + @req.protocol
-    accessToken = @req.session.access_token
-    if not accessToken
-      console.log @req.session
-      @res.render 'demo/index',
-        title: 'Express',
-        loginUrl: fb.getLoginUrl(scope: 'user_about_me')
-    else
-      @res.render 'demo/menu'
+    console.log "===================="
+    console.log @req.query.code
+    console.log "===================="
+
+    @res.render 'demo/index',
+      title: 'Express',
+      loginUrl: muninn.config.fb.redirectUri
 
 
   #
-  # loginCallback
+  # authAction
   #
   # @return [None]
   #
-  loginCallback: ->
-    code = @req.query.code
+  authAction: ->
 
-    if @req.query.error
-      return @res.send 'login-error ' + @req.query.error_description
-    else if not code
-      return @res.redirect '/demo'
+    if not @req.query.code
 
-    fb.api 'oauth/access_token',
-      client_id:      fb.options('appId')
-      client_secret:  fb.options('appSecret')
-      redirect_uri:   fb.options('redirectUri')
-      code:           code
-    , (result) =>
+      authUrl = graph.getOauthUrl
+        client_id:     muninn.config.fb.appId
+        redirect_uri:  muninn.config.fb.redirectUri
+        scope:         'user_about_me'
 
-      if not result or result.error then throw result.error
-      fb.api 'oauth/access_token',
-        client_id:          fb.options('appId')
-        client_secret:      fb.options('appSecret')
-        grant_type:         'fb_exchange_token'
-        fb_exchange_token:  result.access_token
-      , (result) =>
+      if not @req.query.error # checks whether a user denied the app facebook login/permissions
+        console.log 'redirect '+authUrl
+        @res.redirect authUrl
+      else # req.query.error == 'access_denied'
+        console.log 'access denied'
+        @res.send 'access denied'
+      return
 
-        if not result or result.error then throw result.error
-        @req.session.access_token    = result.access_token
-        @req.session.expires         = result.expires or 0
-
-        if @req.query.state
-          parameters                = JSON.parse(@req.query.state)
-          parameters.access_token   = @req.session.access_token
-
-#          console.log(parameters)
-
-          fb.api '/me/' + config.fb.appNamespace +':eat', 'post', parameters , (result) =>
-#            console.log(result)
-            if not result || result.error
-              return @res.send(500, result or 'error')
+    graph.authorize
+      client_id:      muninn.config.fb.appId
+      redirect_uri:   muninn.config.fb.redirectUri
+      client_secret:  muninn.config.fb.appSecret
+      code:           @req.query.code
+    , (err, f) =>
+        @res.redirect '/loggedin'
 
 
-          return @res.redirect('/demo')
-        else
-          return @res.redirect('/demo')
-
-
+  loginAction: ->
+    @res.render 'demo/menu'
 
   #
   # logoutAction

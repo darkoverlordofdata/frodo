@@ -36,7 +36,7 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
-    console.log 'ENCRYPTED: ' + @req.connection.encrypted
+    console.log 'ENCRYPTED: ' + @req.protocol
     accessToken = @req.session.access_token
     if not accessToken
       console.log @req.session
