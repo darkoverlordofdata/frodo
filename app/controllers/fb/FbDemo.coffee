@@ -36,7 +36,7 @@ class FbDemo extends muninn.core.Controller
   indexAction: ->
     @res.render 'demo/index',
       title: 'Express',
-      loginUrl: "http://localhost:3000/login/callback"
+      loginUrl: muninn.config.fb.redirectUri
 
 
   #
