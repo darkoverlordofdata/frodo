@@ -36,7 +36,7 @@ class FbDemo extends muninn.core.Controller
   indexAction: ->
     @res.render 'demo/index',
       title: 'Express',
-      loginUrl: "/login/callback"
+      loginUrl: "http://localhost:3000/login/callback"
 
 
   #
@@ -46,7 +46,8 @@ class FbDemo extends muninn.core.Controller
   #
   authAction: ->
 
-    console.log 'AT authAction'
+    console.log 'AT authAction '
+    console.log @req.query.code
     if not @req.query.code
 
       authUrl = graph.getOauthUrl
@@ -54,10 +55,13 @@ class FbDemo extends muninn.core.Controller
         redirect_uri:  muninn.config.fb.redirectUri
         scope:         'user_about_me'
       console.log 'authUrl = '+authUrl
+      console.log @req.query.error
 
       if not @req.query.error # checks whether a user denied the app facebook login/permissions
+        console.log 'redirect '
         @res.redirect authUrl
       else # req.query.error == 'access_denied'
+        console.log 'access denied'
         @res.send 'access denied'
       return
 
