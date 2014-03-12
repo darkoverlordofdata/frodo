@@ -79,7 +79,7 @@ class FbDemo extends muninn.core.Controller
         @req.session.expires         = result.expires or 0
 
         if @req.query.state
-          parameters                = JSON.parse(req.query.state)
+          parameters                = JSON.parse(@req.query.state)
           parameters.access_token   = @req.session.access_token
 
 #          console.log(parameters)
