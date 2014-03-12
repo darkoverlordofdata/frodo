@@ -1,0 +1,10 @@
+.gridster ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.gridster ul li span {
+    align-self: center;
+    text-align: center;
+}

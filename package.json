@@ -1,7 +1,7 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "frodo",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "frodo",
   "keywords": [
     "OpenShift",
     "Node.js",
@@ -9,27 +9,29 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Bruce Davidson",
+    "email": "brucedavidson@darkoverlordofdata.com",
+    "url": "http://www.darkoverlordofdata.com/"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://www.darkoverlordofdata.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/darkoverlordofdata/frodo"
   },
-
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "express": "~3.4.4"
+    "coffee-script": "~1.7.1",
+    "fb": "~0.6.2",
+    "step": "0.0.5"
   },
   "devDependencies": {},
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js"
 }
