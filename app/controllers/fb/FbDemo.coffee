@@ -57,6 +57,9 @@ class FbDemo extends muninn.core.Controller
         redirect_uri:  muninn.config.fb.redirectUri
         scope:         'user_about_me'
 
+      authUrl = authUrl.replace('http:', 'https:')
+      console.log authUrl
+
       if not @req.query.error # checks whether a user denied the app facebook login/permissions
         console.log 'redirect '+authUrl
         @res.redirect authUrl
