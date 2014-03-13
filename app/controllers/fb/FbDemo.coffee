@@ -32,10 +32,8 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
-    console.log 'ENCRYPTED: ' + @req.protocol
     accessToken = @req.session.access_token
     if not accessToken
-      console.log @req.session
       @res.render 'demo/index',
         title: 'Express',
         loginUrl: fb.getLoginUrl(scope: 'user_about_me')
@@ -48,16 +46,15 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   loginCallback: ->
-    code = @req.query.code
 
     if @req.query.error
       return @res.send 'login-error ' + @req.query.error_description
-    else if not code
+    else if not @req.query.code
       return @res.redirect '/demo'
 
-    fb.authenticate code, ($err, result) =>
+    fb.authenticate @req.query.code, ($err, result) =>
 
-      if $err then throw $err
+      if $err then return muninn.logMessage('error', String($err)) if muninn.showError($err)
 
       @req.session.access_token    = result.access_token
       @req.session.expires         = result.expires or 0
