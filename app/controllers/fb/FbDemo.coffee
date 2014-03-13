@@ -55,7 +55,7 @@ class FbDemo extends muninn.core.Controller
         scope:         'user_about_me'
         response_type:  'code'
 
-      authUrl = authUrl.replace(/$http:/, 'https:')
+      authUrl = authUrl.replace('http:', 'https:')
       console.log '=================================================='
       console.log authUrl
       console.log '=================================================='
