@@ -15,43 +15,43 @@
 #
 muninn = require("muninn")
 muninn.init __dirname
-fb = require("fb")
-
+#fb = require("fb")
 #
-# Facebook Config
+##
+## Facebook Config
+##
+#fb.options
+#  appId: muninn.config.fb.appId
+#  appSecret: muninn.config.fb.appSecret
+#  redirectUri: muninn.config.fb.redirectUri
 #
-fb.options
-  appId: muninn.config.fb.appId
-  appSecret: muninn.config.fb.appSecret
-  redirectUri: muninn.config.fb.redirectUri
-
+##
+## Facebook Authentication Helper
+##
+#fb.authenticate = ($code, $next) ->
 #
-# Facebook Authentication Helper
+#  fb.api "oauth/access_token",
+#    client_id: fb.options("appId")
+#    client_secret: fb.options("appSecret")
+#    redirect_uri: fb.options("redirectUri")
+#    code: $code
+#  , ($result) ->
 #
-fb.authenticate = ($code, $next) ->
-
-  fb.api "oauth/access_token",
-    client_id: fb.options("appId")
-    client_secret: fb.options("appSecret")
-    redirect_uri: fb.options("redirectUri")
-    code: $code
-  , ($result) ->
-
-    return $next('Unable to authenticate') if not $result
-    return $next($result.error) if $result.error
-
-    fb.api "oauth/access_token",
-      client_id: fb.options("appId")
-      client_secret: fb.options("appSecret")
-      grant_type: "fb_exchange_token"
-      fb_exchange_token: $result.access_token
-    , ($result) ->
-
-      return $next('Unable to authenticate') if not $result
-      return $next($result.error) if $result.error
-
-      $next null, $result
-
-
-
+#    return $next('Unable to authenticate') if not $result
+#    return $next($result.error) if $result.error
+#
+#    fb.api "oauth/access_token",
+#      client_id: fb.options("appId")
+#      client_secret: fb.options("appSecret")
+#      grant_type: "fb_exchange_token"
+#      fb_exchange_token: $result.access_token
+#    , ($result) ->
+#
+#      return $next('Unable to authenticate') if not $result
+#      return $next($result.error) if $result.error
+#
+#      $next null, $result
+#
+#
+#
 muninn.start()
