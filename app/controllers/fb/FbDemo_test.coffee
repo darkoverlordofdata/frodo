@@ -19,6 +19,10 @@ muninn = require('muninn')
 class FbDemo extends muninn.core.Controller
 
   fb = require('fb')
+  fb.options
+    appId:          muninn.config.fb.appId
+    appSecret:      muninn.config.fb.appSecret
+    redirectUri:    muninn.config.fb.redirectUri
 
   @routes =
     '/demo':            'indexAction'
@@ -42,6 +46,28 @@ class FbDemo extends muninn.core.Controller
     else
       @res.render 'demo/menu'
 
+
+  authenticate: ($code, $next) ->
+
+    fb.api 'oauth/access_token',
+      client_id:      fb.options('appId')
+      client_secret:  fb.options('appSecret')
+      redirect_uri:   fb.options('redirectUri')
+      code:           $code
+    , ($result) ->
+
+      if not $result or $result.error then $next $result.error
+
+      fb.api 'oauth/access_token',
+        client_id:          fb.options('appId')
+        client_secret:      fb.options('appSecret')
+        grant_type:         'fb_exchange_token'
+        fb_exchange_token:  $result.access_token
+      , ($result) ->
+
+        if not $result or $result.error then $next $result.error
+        else $next null, $result
+
   #
   # loginCallback
   #
@@ -55,7 +81,7 @@ class FbDemo extends muninn.core.Controller
     else if not code
       return @res.redirect '/demo'
 
-    fb.authenticate code, ($err, result) =>
+    @authenticate code, ($err, $result) =>
 
       if $err then throw $err
 
