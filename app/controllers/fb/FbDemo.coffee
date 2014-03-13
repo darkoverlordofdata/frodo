@@ -53,7 +53,9 @@ class FbDemo extends muninn.core.Controller
         client_id:     muninn.config.fb.appId
         redirect_uri:  muninn.config.fb.redirectUri
         scope:         'user_about_me'
+        response_type:  'code'
 
+      authUrl[4] = 's'
       console.log '=================================================='
       console.log authUrl
       console.log '=================================================='
