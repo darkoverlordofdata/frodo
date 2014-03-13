@@ -16,16 +16,14 @@
 
 muninn = require('muninn')
 
-
 class FbDemo extends muninn.core.Controller
 
-  graph = require('fbgraph')
+  fb = require('fb')
 
   @routes =
     '/demo':            'indexAction'
-    '/login/callback':  'authAction'
+    '/login/callback':  'loginCallback'
     '/logout':          'logoutAction'
-    '/loggedin':        'loginAction'
 
 
   #
@@ -34,48 +32,48 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
-    console.log "===================="
-    console.log @req.query.code
-    console.log "===================="
-
-    @res.render 'demo/index',
-      title: 'Express',
-      loginUrl: muninn.config.fb.redirectUri
-
+    accessToken = @req.session.access_token
+    if not accessToken
+      @res.render 'demo/index',
+        title: 'Express',
+        loginUrl: fb.getLoginUrl(scope: 'user_about_me')
+    else
+      @res.render 'demo/menu'
 
   #
-  # authAction
+  # loginCallback
   #
   # @return [None]
   #
-  authAction: ->
+  loginCallback: ->
 
-    if not @req.query.code
+    if @req.query.error
+      return @res.send 'login-error ' + @req.query.error_description
+    else if not @req.query.code
+      return @res.redirect '/demo'
 
-      authUrl = graph.getOauthUrl
-        client_id:     muninn.config.fb.appId
-        redirect_uri:  muninn.config.fb.redirectUri
-        scope:         'user_about_me'
+    fb.authenticate @req.query.code, ($err, result) =>
 
-      if not @req.query.error # checks whether a user denied the app facebook login/permissions
-        console.log 'redirect '+authUrl
-        @res.redirect authUrl
-      else # req.query.error == 'access_denied'
-        console.log 'access denied'
-        @res.send 'access denied'
-      return
+      if $err then return muninn.logMessage('error', String($err)) if muninn.showError($err)
 
-    graph.authorize
-      client_id:      muninn.config.fb.appId
-      redirect_uri:   muninn.config.fb.redirectUri
-      client_secret:  muninn.config.fb.appSecret
-      code:           @req.query.code
-    , (err, f) =>
-        @res.redirect '/loggedin'
+      @req.session.access_token    = result.access_token
+      @req.session.expires         = result.expires or 0
+
+      if @req.query.state
+        parameters                = JSON.parse(@req.query.state)
+        parameters.access_token   = @req.session.access_token
+
+        fb.api '/me/' + config.fb.appNamespace +':eat', 'post', parameters , (result) =>
+#            console.log(result)
+          if not result || result.error
+            return @res.send(500, result or 'error')
 
 
-  loginAction: ->
-    @res.render 'demo/menu'
+        return @res.redirect('/demo')
+      else
+        return @res.redirect('/demo')
+
+
 
   #
   # logoutAction
