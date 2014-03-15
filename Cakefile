@@ -30,10 +30,10 @@ task 'build:src', 'Build the coffee app', ->
   nfcall exec, 'coffee -o tmp -c -b src'
 
   .then ->
-      nfcall exec, 'browserify --debug tmp/sociogram/main.js > www/js/app.js'
+      nfcall exec, 'browserify --debug tmp/sociogram/main.js > www/sociogram/js/app.js'
 
   .then ->
-      nfcall exec, 'browserify --debug tmp/sociogram/main.js | uglifyjs > www/js/app.min.js'
+      nfcall exec, 'browserify --debug tmp/sociogram/main.js | uglifyjs > www/sociogram/js/app.min.js'
 
   .fail ($err) ->
     util.error $err
