@@ -1,7 +1,6 @@
 #Frodo Lives!
 
-A simple MVC framework that sits on top of express.js
-
+Facebook test site built on muninn
 
 
     rhc set-env FBAPPID=012345678901234 -a frodo -n d16a
