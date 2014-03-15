@@ -1,5 +1,6 @@
 /.idea
 /tmp
+/node_modules/.bin
 /node_modules/coffee-script
 /node_modules/express
 /node_modules/facebook-node-sdk
