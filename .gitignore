@@ -1,2 +1,7 @@
 /.idea
 /tmp
+/node_modules/coffee-script
+/node_modules/express
+/node_modules/facebook-node-sdk
+/node_modules/fb
+/node_modules/fbgraph
