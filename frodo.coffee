@@ -16,7 +16,7 @@
 muninn = require("muninn")
 muninn.init __dirname
 fb = require("fb")
-
+Facebook = require('facebook-node-sdk')
 #
 # Facebook Config
 #
@@ -54,4 +54,10 @@ fb.authenticate = ($code, $next) ->
 
 
 
-muninn.start()
+middleware = ($req, $res, $next) ->
+
+  muninn.logMessage 'debug', "MIDDLEWARE"
+  $next()
+
+muninn.start Facebook.middleware(appId: muninn.config.fb.appId, secret: muninn.config.fb.appSecret), middleware
+

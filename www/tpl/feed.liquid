@@ -1,0 +1,17 @@
+<ul>
+    {% for item in data %}
+    <li>{% if item.message %}{{ item.message }}<br/>{% endif %}
+        {% if item.story %}{{ item.story }}<br/>{% endif %}
+        {% if item.link %}<a href="{{ item.link }}">{{ item.link }}</a><br/>{% endif %}
+        {% if item.created_time %}{{ item.created_time }}{% endif %}
+    {% endfor %}
+</ul>
+
+<ul class="pager">
+    {% if paging.previous %}
+    <li><a href="#" class="previous">&larr; Previous</a></li>
+    {% endif %}
+    {% if paging.next %}
+    <li><a href="#" class="next">Next &rarr;</a></li>
+    {% endif %}
+</ul>

@@ -29,7 +29,8 @@
     "coffee-script": "~1.7.1",
     "fb": "~0.6.2",
     "fbgraph": "~0.2.9",
-    "facebook-node-sdk": "~0.2.0"
+    "facebook-node-sdk": "~0.2.0",
+    "express": "~3.4.8"
   },
   "devDependencies": {},
   "bundleDependencies": [],

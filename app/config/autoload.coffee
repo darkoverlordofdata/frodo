@@ -72,5 +72,6 @@ module.exports =
     'fb/FbDemo'
     'fb/FbApi'
     'fb/FbMeals'
+    'sdk/FbDemo'
   ]
 

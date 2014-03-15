@@ -27,6 +27,7 @@ class Welcome extends muninn.core.Controller
       id : 'main'
       links: [
         { name : 'Facebook Demo using Thuzi/facebook-node-sdk', url : '/demo' }
+        { name : 'Sociogram Clone/Demo', url : '/sociogram.html' }
       ]
       upperHelper: (string) ->
         string.toUpperCase()

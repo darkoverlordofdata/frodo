@@ -33,6 +33,9 @@ task 'build:src', 'Build the coffee app', ->
     nfcall exec, 'browserify --debug tmp/nc/main.js  > www/nc/js/app.js'
 
   .then ->
+      nfcall exec, 'browserify --debug tmp/sociogram/main.js  > www/js/app.js'
+
+  .then ->
     nfcall exec, 'browserify --debug tmp/ld/main.js > www/ld/js/app.dbg.js'
 
   .then ->

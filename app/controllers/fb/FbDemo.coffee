@@ -32,6 +32,7 @@ class FbDemo extends muninn.core.Controller
   # @return [None]
   #
   indexAction: ->
+
     accessToken = @req.session.access_token
     if not accessToken
       @res.render 'demo/index',
