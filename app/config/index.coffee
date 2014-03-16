@@ -33,7 +33,7 @@ module.exports =
   #|
   #|  ip to serve http
   #|
-  ip:     process.env.OPENSHIFT_NODEJS_IP or "127.0.0.1"
+  ip:     process.env.OPENSHIFT_NODEJS_IP or "localhost"
 
   #|
   #|--------------------------------------------------------------------------

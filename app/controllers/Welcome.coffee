@@ -23,11 +23,12 @@ class Welcome extends muninn.core.Controller
   indexAction: ->
 
     @res.render 'page',
-      title : 'frodo'
+      title : 'frodo lives!'
       id : 'main'
       links: [
         { name : 'Facebook Demo using Thuzi/facebook-node-sdk', url : '/demo' }
-        { name : 'Sociogram Clone/Demo', url : '/sociogram/index.html' }
+        { name : 'Sociogram Clone/Demo', url : '/sociogram' }
+        { name : 'Lets Do Lunch!', url : '/letsdolunch' }
       ]
       upperHelper: (string) ->
         string.toUpperCase()
