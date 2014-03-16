@@ -35,6 +35,12 @@ task 'build:src', 'Build the coffee app', ->
   .then ->
       nfcall exec, 'browserify --debug tmp/sociogram/main.js | uglifyjs > www/sociogram/js/app.min.js'
 
+  .then ->
+      nfcall exec, 'browserify --debug tmp/scrumptious/main.js > www/scrumptious/js/app.js'
+
+  .then ->
+      nfcall exec, 'browserify --debug tmp/scrumptious/main.js | uglifyjs > www/scrumptious/js/app.min.js'
+
   .fail ($err) ->
     util.error $err
 
