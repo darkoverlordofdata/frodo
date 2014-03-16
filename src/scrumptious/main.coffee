@@ -188,7 +188,7 @@ displaySelectedMeal = ->
   $("#selected_meal").html output
 
 # Nearby Places
-getNearby = ->
+window.getNearby = ->
   
   # Check for and use cached data
   return  if nearbyPlaces
@@ -224,7 +224,7 @@ displayPlaces = (places) ->
   $("#places-list").html(output).listview "refresh"
 
 # Friends
-getFriends = ->
+window.getFriends = ->
   
   # Check for and use cached data
   return  if myFriends
