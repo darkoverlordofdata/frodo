@@ -98,7 +98,7 @@ module.exports =
   #| For the browser or desktop
   #|
   #|
-  favicon: 'ico/favicon.png'
+  favicon: 'favicon.png'
 
   #|
   #|--------------------------------------------------------------------------
