@@ -30,7 +30,8 @@
     "fb": "~0.6.2",
     "fbgraph": "~0.2.9",
     "facebook-node-sdk": "~0.2.0",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "muninn": "0.0.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],

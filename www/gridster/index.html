@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>BACKBONE Marionette Tutorial: Collections</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="content">
+    </div>
+
+    <script type="text/template" id="angry_cats-template">
+      <thead>
+        <tr class='header'>
+          <th>Rank</th>
+          <th>Votes</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </script>
+
+    <script type="text/template" id="angry_cat-template">
+      <td><%= rank %></td>
+      <td><%= votes %></td>
+      <td><%= name %></td>
+      <td><img class='angry_cat_pic' src='<%= image_path %>' /></td>
+      <td>
+        <div class='rank_up'><img src='images/up.gif' /></div>
+        <div class='rank_down'><img src='images/down.gif' /></div>
+      </td>
+      <td><a href="#" class="disqualify">Disqualify</a></td>
+    </script>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.0.3-bundled/backbone.marionette.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
